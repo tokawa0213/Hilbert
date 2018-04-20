@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.util.Log;
 
 public class MainActivity extends AppCompatActivity {
     private TextView orderView;
@@ -16,6 +17,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (savedInstanceState != null)
+            order = savedInstanceState.getInt("ORDER");
+        //if value is stored load the value from the key
         setContentView(R.layout.activity_main);
         orderView = findViewById(R.id.order_view);
         hilbertView = findViewById(R.id.hilbert_view);
@@ -55,4 +59,12 @@ public class MainActivity extends AppCompatActivity {
         decButton.setEnabled(order > 1);
         incButton.setEnabled(order < MAX_ORDER);
     }
-}
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("ORDER", order);
+        //change the line above
+        // name => value to save
+        //KEY_NAME => ket name to save in
+    }}

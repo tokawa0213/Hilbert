@@ -1,5 +1,6 @@
 package jp.ac.titech.itpro.sdl.hilbert;
 
+import java.util.Random;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -31,16 +32,19 @@ public class HilbertView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
+        Random rnd = new Random();
+        int r = rnd.nextInt(255);
+        int g = rnd.nextInt(255);
+        int b = rnd.nextInt(255);
         super.onDraw(canvas);
         this.canvas = canvas;
 
         int w = canvas.getWidth();
         int h = canvas.getHeight();
-        paint.setColor(Color.DKGRAY);
+        paint.setColor(Color.BLACK);
         canvas.drawRect(0, 0, w, h, paint);
-
-        paint.setColor(Color.WHITE);
-        paint.setStrokeWidth(3);
+        paint.setARGB(255,r,g,b);
+        paint.setStrokeWidth(1);
         int size = w < h ? w : h;
         double step = (double) size / (1 << order);
         turtle.setPos((w - size + step) / 2, (h + size - step) / 2);
